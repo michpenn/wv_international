@@ -2,7 +2,7 @@
  * Created by michpenn on 1/17/17.
  */
 $(document).ready(function(){
-    slideInPyramidParts('#pyramidBottom', '#pyramidMiddle', '#pyramidTop');
+    //slideInPyramidParts('#pyramidBottom', '#pyramidMiddle', '#pyramidTop');
 });
 
 function slideInPyramidParts(){
