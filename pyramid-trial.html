@@ -18,7 +18,7 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <style>
-        .snowflakes {
+        .fallingPellets {
             top: 0px;
             left: 0px;
             position: absolute;
@@ -33,9 +33,8 @@
         }
 
         #site {
-            background-color: darkgrey;
+            /*background-color: darkgrey;*/
             padding: 1% 4%;
-
             width: 800px;
             height: 800px;
             margin: 0 auto;
@@ -48,8 +47,6 @@
             margin: auto;
             width: 0;
             height: 0;
-            /*opacity: 0;*/
-
             border-left: 300px solid transparent;
             border-right: 300px solid transparent;
             border-bottom: 300px solid transparent;
@@ -60,7 +57,6 @@
         }
 
         .pyramid-content {
-            /*background-color: black;*/
             background-color: transparent;
             color: white;
             z-index: 1000;
@@ -74,9 +70,6 @@
             top: 50px;
             height: auto;
             width: 100px;
-            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
         }
 
         .pyramid-content-middle {
@@ -84,9 +77,6 @@
             top: 45px;
             height: auto;
             width: 260px;
-            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
         }
 
         .pyramid-content-bottom {
@@ -94,10 +84,6 @@
             top: 45px;
             height: auto;
             width: 440px;
-            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
-            /*width: auto;*/
         }
 
         .pellet {
@@ -115,26 +101,26 @@
     <div id="pyramid">
             <div class="top-row pyramid-content pyramid-content-top">
                 <ul class="list-inline top-row-container row-container">
-                    <li class="h4 pellet top-pelet">PEI</li>
-                    <li class="h4 pellet top-pelet">PSU</li>
-                    <li class="h4 pellet top-pelet">PEEK</li>
+                    <li class="h4 pellet top-pellet">PEI</li>
+                    <li class="h4 pellet top-pellet">PSU</li>
+                    <li class="h4 pellet top-pellet">PEEK</li>
                 </ul>
             </div>
             <div class="middle-row pyramid-content pyramid-content-middle">
                 <ul class="list-inline middle-row-container row-container">
-                    <li class="h4 pellet  middle-pelet">PBT</li>
-                    <li class="h4 pellet  middle-pelet">NYLON</li>
-                    <li class="h4 pellet  middle-pelet">ACETAL</li>
-                    <li class="h4 pellet  middle-pelet">POLYCARBONATE</li>
+                    <li class="h4 pellet  middle-pellet">PBT</li>
+                    <li class="h4 pellet  middle-pellet">NYLON</li>
+                    <li class="h4 pellet  middle-pellet">ACETAL</li>
+                    <li class="h4 pellet  middle-pellet">POLYCARBONATE</li>
                 </ul>
             </div>
             <div class="bottom-row pyramid-content pyramid-content-bottom">
                 <ul class="list-inline bottom-row-container row-container">
-                    <li class="h4 pellet  bottom-pelet">ABS</li>
-                    <li class="h4 pellet  bottom-pelet">PC/ABS</li>
-                    <li class="h4 pellet  bottom-pelet">CUSTOM COLOR PC</li>
-                    <li class="h4 pellet  bottom-pelet">CUSTOM COLOR ABS</li>
-                    <li class="h4 pellet bottom-pelet">CUSTOM COLOR PC/ABS</li>
+                    <li class="h4 pellet  bottom-pellet">ABS</li>
+                    <li class="h4 pellet  bottom-pellet">PC/ABS</li>
+                    <li class="h4 pellet  bottom-pellet">CUSTOM COLOR PC</li>
+                    <li class="h4 pellet  bottom-pellet">CUSTOM COLOR ABS</li>
+                    <li class="h4 pellet bottom-pellet">CUSTOM COLOR PC/ABS</li>
                 </ul>
             </div>
     </div>
@@ -142,92 +128,89 @@
 </body>
 
 <script>
-    // Snow Falling
+    var pellets = ['<div data-pelletNum="0" class="fallingPellets pellets bottom"></div>', '<div data-pelletNum="1" class="fallingPellets pellets bottom"></div>', '<div data-pelletNum="2" class="fallingPellets pellets bottom"></div>', '<div data-pelletNum="3" class="fallingPellets pellets bottom"></div>', '<div data-pelletNum="4" class="fallingPellets pellets bottom"></div>',
+        '<div data-pelletNum="0" class="fallingPellets pellets middle"></div>', '<div data-pelletNum="1" class="fallingPellets pellets middle"></div>', '<div data-pelletNum="2" class="fallingPellets pellets middle"></div>', '<div data-pelletNum="3" class="fallingPellets pellets middle"></div>',
+        '<div data-pelletNum="0" class="fallingPellets pellets top"></div>', '<div data-pelletNum="1" class="fallingPellets pellets top"></div>', '<div data-pelletNum="2" class="fallingPellets pellets top"></div>'];
 
-    var pellets = ['<div data-pelletNum="0" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="1" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="2" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="3" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="4" class="snowflakes pellets bottom"></div>',
-        '<div data-pelletNum="0" class="snowflakes pellets middle"></div>', '<div data-pelletNum="1" class="snowflakes pellets middle"></div>', '<div data-pelletNum="2" class="snowflakes pellets middle"></div>', '<div data-pelletNum="3" class="snowflakes pellets middle"></div>',
-        '<div data-pelletNum="0" class="snowflakes pellets top"></div>', '<div data-pelletNum="1" class="snowflakes pellets top"></div>', '<div data-pelletNum="2" class="snowflakes pellets top"></div>'];
-
-    function fallingSnow() {
-        var topPelets = $('.top-pelet');
-        var middlePelets = $('.middle-pelet');
-        var bottomPelets = $('.bottom-pelet');
-        var $snowflakes = $(),
-                createSnowflakes = function () {
+    function fallingPellets() {
+        var topPellets = $('.top-pellet');
+        var middlePellets = $('.middle-pellet');
+        var bottomPellets = $('.bottom-pellet');
+        var $fallingPellets = $(),
+                createFallingPellets = function () {
                     var qt = 12;
                     for (var i = 0; i < qt; ++i) {
-                        var $snowflake = $(pellets[i]);
-                        $snowflake.css({
+                        var $pellet = $(pellets[i]);
+                        $pellet.css({
                             'left': (Math.random() * $('#site').width()) + 'px',
                             'top': (-Math.random() * $('#site').height()) + 'px'
                         });
-                        // add this snowflake to the set of snowflakes
-                        $snowflakes = $snowflakes.add($snowflake);
+                        $fallingPellets = $fallingPellets.add($pellet);
                     }
-                    $('#snowZone').prepend($snowflakes);
+                    $('#snowZone').prepend($fallingPellets);
                 },
 
-                runSnowStorm = function () {
-                    var peletsShown = 0;
-                    var peletCount = pellets.length;
+                RunFallingPellets = function () {
+                    var pelletsShown = 0;
+                    var pelletCount = pellets.length;
 
-                    $snowflakes.each(function () {
+                    $fallingPellets.each(function () {
 
-                        var singleAnimation = function ($flake) {
+                        var singleAnimation = function ($pellet) {
                             var row;
-                            var flakeOffset = $flake.offset();
-                            var flakeOffsetLeft = flakeOffset.left;
+                            var pelletOffset = $pellet.offset();
+                            var pelletOffsetLeft = pelletOffset.left;
                             var rowWidth;
                             var rowOffset;
                             var rowOffsetLeft;
                             var leftPosition;
-                            var peletsToShow;
+                            var pelletsToShow;
                             var time;
 
-                            if ($flake.hasClass('bottom')) {
+                            if ($pellet.hasClass('bottom')) {
                                 row = $('.bottom-row-container');
-                                peletsToShow = bottomPelets;
+                                pelletsToShow = bottomPellets;
                                 time = Math.random() * -2500 + 3000;
                             }
-                            else if ($flake.hasClass('middle')) {
+                            else if ($pellet.hasClass('middle')) {
                                 row = $('.middle-row-container');
-                                peletsToShow = middlePelets;
+                                pelletsToShow = middlePellets;
                                 time = Math.random() * -2500 + 4000;
                             }
-                            else if ($flake.hasClass('top')) {
+                            else if ($pellet.hasClass('top')) {
                                 row = $('.top-row-container');
-                                peletsToShow = topPelets;
+                                pelletsToShow = topPellets;
                                 time = Math.random() * -2500 + 5000;
                             }
                             rowWidth = row.width();
                             rowOffset = row.offset();
                             rowOffsetLeft = rowOffset.left;
 
-                            if (flakeOffsetLeft > (rowOffsetLeft + rowWidth)) {
+                            if (pelletOffsetLeft > (rowOffsetLeft + rowWidth)) {
                                 leftPosition = '-=200'
                             }
-                            else if (flakeOffsetLeft < rowOffsetLeft) {
+                            else if (pelletOffsetLeft < rowOffsetLeft) {
                                 leftPosition = '+=100';
                             }
                             else {
                                 leftPosition = '+=0';
                             }
 
-                            $flake.animate({
+                            $pellet.animate({
                                 top: rowOffset.top,
                                 left: leftPosition,
                                 opacity: "0",
                             }, time, function () {
 
-                                var pelletNum = parseFloat($flake.attr('data-pelletNum'));
-                                var chosenPelet = peletsToShow[pelletNum];
-                                $(chosenPelet).animate({
+                                var pelletNum = parseFloat($pellet.attr('data-pelletNum'));
+                                var chosenPellet = pelletsToShow[pelletNum];
+                                $(chosenPellet).animate({
                                     opacity: 1,
                                 }, 500);
-                                peletsShown++;
+                                pelletsShown++;
 
-                                $flake.remove();
-                                if(peletsShown == peletCount) {
+                                $pellet.remove();
+                                if(pelletsShown == pelletCount) {
 
                                     $('#pyramid').css({
                                         'border-bottom-color': "#000",
@@ -240,10 +223,10 @@
                     });
                 };
 
-        createSnowflakes();
-        runSnowStorm();
+        createFallingPellets();
+        RunFallingPellets();
     }
-    fallingSnow();
+    fallingPellets();
 
 </script>
 </html>
