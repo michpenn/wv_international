@@ -2,392 +2,248 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WV International Pyramid - trial</title>
+    <title>Pyramid Trial</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+        .snowflakes {
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            z-index: 200;
+            width: 10px;
+            height: 10px;
+            background:white;
+        }
+
+        body {
+            background-color: grey;
+        }
+
+        #site {
+            background-color: darkgrey;
+            padding: 1% 4%;
+
+            width: 800px;
+            height: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #pyramid {
+            position: absolute;
+            bottom: 10px;
+            margin: auto;
+            width: 0;
+            height: 0;
+            /*opacity: 0;*/
+
+            border-left: 300px solid transparent;
+            border-right: 300px solid transparent;
+            border-bottom: 300px solid transparent;
+            -webkit-transition : border 2500ms ease-in;
+            -moz-transition : border 2500ms ease-in;
+            -o-transition : border 2500ms ease-in;
+            z-index: 1;
+        }
+
+        .pyramid-content {
+            /*background-color: black;*/
+            background-color: transparent;
+            color: white;
+            z-index: 1000;
+            position: relative;
+            margin: auto 0;
+            text-align: center;
+        }
+
+        .pyramid-content-top {
+            left: -50px;
+            top: 50px;
+            height: auto;
+            width: 100px;
+            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+        }
+
+        .pyramid-content-middle {
+            left: -130px;
+            top: 45px;
+            height: auto;
+            width: 260px;
+            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+        }
+
+        .pyramid-content-bottom {
+            left: -220px;
+            top: 45px;
+            height: auto;
+            width: 440px;
+            /*-webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*-moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);*/
+            /*width: auto;*/
+        }
+
+        .pellet {
+            opacity: 0;
+        }
+
+
+    </style>
 </head>
-<style>
-    /*
-    code from: http://codepen.io/florian-wirtz/pen/pohIK
 
-    */
-
-    /* background */
-    body {
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    .bg {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url(http://66.media.tumblr.com/697d436417d1e875ef566918c5b2547b/tumblr_n7fg2vYZ741st5lhmo1_1280.jpg);
-        background-size: cover;
-        background-position: center;
-        background-color: black;
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-    }
-
-    .container {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        width: auto;
-        height: 600px;
-        margin-top: -150px;
-    }
-</style>
-<style>
-    /*Pyramid  Small*/
-    #pyramid-small {
-        position: absolute;
-        margin-left: -50px;
-        /*height: auto;*/
-        /*width: auto;*/
-        width: 500px;
-        z-index: 30;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-animation: rotateSmall 10s ease infinite;
-        animation: rotateSmall 10s ease infinite;
-    }
-
-    @-webkit-keyframes rotateSmall {
-        0% {
-            -webkit-transform: rotateX(-10deg) rotateY(-45deg) translateY(30px);
-        }
-        25% {
-            -webkit-transform: rotateX(-10deg) rotateY(45deg) translateY(20px);
-        }
-        50% {
-            -webkit-transform: rotateX(-10deg) rotateY(135deg) translateY(10px);
-        }
-        75% {
-            -webkit-transform: rotateX(-10deg) rotateY(225deg) translateY(0);
-        }
-        100% {
-            -webkit-transform: rotateX(-10deg) rotateY(-45deg) translateY(30px);
-        }
-    }
-
-    @keyframes rotateSmall {
-        0% {
-            transform: rotateX(-10deg) rotateY(-45deg) translateY(30px);
-        }
-        25% {
-            transform: rotateX(-10deg) rotateY(45deg) translateY(20px);
-        }
-        50% {
-            transform: rotateX(-10deg) rotateY(135deg) translateY(10px);
-        }
-        75% {
-            transform: rotateX(-10deg) rotateY(225deg) translateY(0);
-        }
-        100% {
-            transform: rotateX(-10deg) rotateY(-45deg) translateY(30px);
-        }
-    }
-
-    #pyramid-small-shadow {
-        position: absolute;
-        margin-left: -20px;
-        height: 0;
-        width: 300px;
-        z-index: 20;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-        -webkit-animation: rotateSmall 10s ease infinite;
-        animation: rotateSmall 10s ease infinite;
-    }
-
-    @-webkit-keyframes rotateSmall {
-        0% {
-            -webkit-transform: rotateX(-12deg) rotateY(-45deg) translateY(30px);
-        }
-        25% {
-            -webkit-transform: rotateX(-12deg) rotateY(45deg) translateY(20px);
-        }
-        50% {
-            -webkit-transform: rotateX(-12deg) rotateY(135deg) translateY(10px);
-        }
-        75% {
-            -webkit-transform: rotateX(-12deg) rotateY(225deg) translateY(0);
-        }
-        100% {
-            -webkit-transform: rotateX(-12deg) rotateY(-45deg) translateY(30px);
-        }
-    }
-
-    @keyframes rotateSmall {
-        0% {
-            transform: rotateX(-12deg) rotateY(-45deg) translateY(30px);
-        }
-        25% {
-            transform: rotateX(-12deg) rotateY(45deg) translateY(20px);
-        }
-        50% {
-            transform: rotateX(-12deg) rotateY(135deg) translateY(10px);
-        }
-        75% {
-            transform: rotateX(-12deg) rotateY(225deg) translateY(0);
-        }
-        100% {
-            transform: rotateX(-12deg) rotateY(-45deg) translateY(30px);
-        }
-    }
-
-    .pyramid-small {
-        width: 500px;
-        height: 500px;
-        position: absolute;
-    }
-
-    .pyramid-small.shadow {
-
-    }
-
-
-    .pyram-small.shadow {
-        width: 80px;
-        height: 80px;
-        margin: 10px;
-        background: black;
-        opacity: 0.3;
-        -webkit-filter: blur(4px);
-        -webkit-transform: rotateX(-90deg) translateZ(88px);
-        transform: rotateX(-90deg) translateZ(88px);
-    }
-
-
-    .pyramid-side {
-        /*width: auto;*/
-        /*border: 1px solid green;*/
-        /*width: 0;*/
-        height: 0;
-        /*border-top: 50px solid yellow;*/
-        border-left: 150px solid transparent;
-        border-right: 150px solid transparent;
-        border-bottom: 200px solid #e5bba1;
-        -webkit-transition: all 2s ease;
-        transition: all 2s ease;
-
-        z-index: 1;
-        position: absolute;
-    }
-
-    .pyramid-side-container {
-        /*border: 1px solid green;*/
-        position: absolute;
-        bottom: -200px;
-        left: -250px;
-        z-index: 1000;
-        width: 500px;
-        /*height: 200px;*/
-        margin-left: auto;
-        margin-right: auto;
-
-    }
-
-    .pyramid-side.one {
-        -webkit-transform: rotateX(30deg)  rotateY(0deg) translateY(180px) translateZ(180px);
-        transform: rotateX(30deg)  rotateY(0deg) translateY(180px) translateZ(180px);
-    }
-    .pyramid-side.two {
-        -webkit-transform: rotateX(0deg)  rotateY(90deg) rotateX(30deg) translateY(180px) translateZ(180px);
-        transform: rotateX(0deg)  rotateY(90deg) rotateX(30deg) translateY(180px) translateZ(180px);
-    }
-
-    .pyramid-side.three {
-        -webkit-transform: rotateX(-30deg)  rotateY(180deg) translateY(180px) translateZ(180px);
-        transform: rotateX(-30deg)  rotateY(180deg) translateY(180px) translateZ(180px);
-    }
-    .pyramid-side.four {
-        -webkit-transform: rotateX(0deg)  rotateY(-90deg) rotateX(30deg) translateY(180px) translateZ(180px);
-        transform: rotateX(0deg)  rotateY(-90deg) rotateX(30deg) translateY(180px) translateZ(180px);
-    }
-
-    .pyramid-side.one:after, .pyramid-side.two:after, .pyramid-side.three:after, ..pyramid-side.four:after {
-        content: '';
-        position: absolute;
-        top: 50px;
-        margin-left: -10px;
-        width: 0;
-        height: 0;
-        border-left: 150px solid transparent;
-        border-right: 150px solid transparent;
-        border-bottom: 200px solid #474c48;
-        -webkit-transition: all 2s ease;
-        transition: all 2s ease;
-        -webkit-transform: translateY(-50px);
-        transform: translateY(-50px);
-    }
-
-    .pyramid-tier {
-        /*border: 1px solid pink;*/
-        width: auto;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        /*z-index: 20;*/
-    }
-
-    .pyramid-tier-top {
-        border: 1px solid white;
-        width: 150px;
-    }
-
-    .pyramid-tier-middle {
-        border: 1px solid white;
-        width: 200px;
-        /*font-size: 110%;*/
-    }
-
-    .pyramid-tier-bottom {
-        width: 250px;
-        /*font-size: 120%;*/
-        border: 1px solid white;
-    }
-
-    .pyramid-text {
-        position: relative;
-        display: inline-block;
-    }
-
-
-</style>
-<style>
-    /*Pyramid Big*/
-    #pyramid-big {
-        position: absolute;
-        top: 90px;
-        margin-left: -100px;
-        height: 200px;
-        width: 200px;
-        z-index: 10;
-        /*-webkit-transform-style: preserve-3d;*/
-        /*transform-style: preserve-3d;*/
-        /*-webkit-animation: rotateBig 10s ease infinite;*/
-        /*animation: rotateBig 10s ease infinite;*/
-    }
-
-    .pyram-big {
-        width: 200px;
-        height: 200px;
-        position: absolute;
-    }
-</style>
 <body>
-<div class="bg"></div>
 
-
-<div class="container">
-    <div id="pyramid-small">
-        <div class="pyramid-side one">
-            <div class="pyramid-side-container">
-                <div class="pyramid-tier pyramid-tier-top">
-                    <span class="pyramid-text">PEI</span>
-                    <span class="pyramid-text">PSU</span>
-                    <span class="pyramid-text">PEEK</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-middle">
-                    <span class="pyramid-text">PBT</span>
-                    <span class="pyramid-text">NYLON</span>
-                    <span class="pyramid-text">ACETAL</span>
-                    <span class="pyramid-text">POLYCARBONATE</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-bottom">
-                    <span class="pyramid-text">ABS</span>
-                    <span class="pyramid-text">PC/ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC</span>
-                    <span class="pyramid-text">CUSTOM COLOR ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC/ABS</span>
-                </div>
+<div id="site">
+    <div id="snowZone"></div>
+    <div id="pyramid">
+            <div class="top-row pyramid-content pyramid-content-top">
+                <ul class="list-inline top-row-container row-container">
+                    <li class="h4 pellet top-pelet">PEI</li>
+                    <li class="h4 pellet top-pelet">PSU</li>
+                    <li class="h4 pellet top-pelet">PEEK</li>
+                </ul>
             </div>
-        </div>
-        <div class="pyramid-side two">
-            <div class="pyramid-side-container">
-                <div class="pyramid-tier pyramid-tier-top">
-                    <span class="pyramid-text">PEI</span>
-                    <span class="pyramid-text">PSU</span>
-                    <span class="pyramid-text">PEEK</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-middle">
-                    <span class="pyramid-text">PBT</span>
-                    <span class="pyramid-text">NYLON</span>
-                    <span class="pyramid-text">ACETAL</span>
-                    <span class="pyramid-text">POLYCARBONATE</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-bottom">
-                    <span class="pyramid-text">ABS</span>
-                    <span class="pyramid-text">PC/ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC</span>
-                    <span class="pyramid-text">CUSTOM COLOR ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC/ABS</span>
-                </div>
+            <div class="middle-row pyramid-content pyramid-content-middle">
+                <ul class="list-inline middle-row-container row-container">
+                    <li class="h4 pellet  middle-pelet">PBT</li>
+                    <li class="h4 pellet  middle-pelet">NYLON</li>
+                    <li class="h4 pellet  middle-pelet">ACETAL</li>
+                    <li class="h4 pellet  middle-pelet">POLYCARBONATE</li>
+                </ul>
             </div>
-        </div>
-        <div class="pyramid-side three">
-            <div class="pyramid-side-container">
-                <div class="pyramid-tier pyramid-tier-top">
-                    <span class="pyramid-text">PEI</span>
-                    <span class="pyramid-text">PSU</span>
-                    <span class="pyramid-text">PEEK</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-middle">
-                    <span class="pyramid-text">PBT</span>
-                    <span class="pyramid-text">NYLON</span>
-                    <span class="pyramid-text">ACETAL</span>
-                    <span class="pyramid-text">POLYCARBONATE</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-bottom">
-                    <span class="pyramid-text">ABS</span>
-                    <span class="pyramid-text">PC/ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC</span>
-                    <span class="pyramid-text">CUSTOM COLOR ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC/ABS</span>
-                </div>
+            <div class="bottom-row pyramid-content pyramid-content-bottom">
+                <ul class="list-inline bottom-row-container row-container">
+                    <li class="h4 pellet  bottom-pelet">ABS</li>
+                    <li class="h4 pellet  bottom-pelet">PC/ABS</li>
+                    <li class="h4 pellet  bottom-pelet">CUSTOM COLOR PC</li>
+                    <li class="h4 pellet  bottom-pelet">CUSTOM COLOR ABS</li>
+                    <li class="h4 pellet bottom-pelet">CUSTOM COLOR PC/ABS</li>
+                </ul>
             </div>
-        </div>
-        <div class="pyramid-side four">
-            <div class="pyramid-side-container">
-                <div class="pyramid-tier pyramid-tier-top">
-                    <span class="pyramid-text">PEI</span>
-                    <span class="pyramid-text">PSU</span>
-                    <span class="pyramid-text">PEEK</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-middle">
-                    <span class="pyramid-text">PBT</span>
-                    <span class="pyramid-text">NYLON</span>
-                    <span class="pyramid-text">ACETAL</span>
-                    <span class="pyramid-text">POLYCARBONATE</span>
-                </div>
-                <div class="pyramid-tier pyramid-tier-bottom">
-                    <span class="pyramid-text">ABS</span>
-                    <span class="pyramid-text">PC/ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC</span>
-                    <span class="pyramid-text">CUSTOM COLOR ABS</span>
-                    <span class="pyramid-text">CUSTOM COLOR PC/ABS</span>
-                </div>
-            </div>
-        </div>
     </div>
-    <div id="pyramid-small-shadow">
-    <div class="pyram-small shadow"></div>
-    </div>
-    <!--<div id="pyramid-big">-->
-    <!--<div class="pyram-big base">Base </div>-->
-    <!--<div class="pyram-big one s1">Tier 1</div>-->
-    <!--<div class="pyram-big two s2">Tier 2</div>-->
-    <!--<div class="pyram-big three s3">Tier 3</div>-->
-    <!--<div class="pyram-big four s4">Tier 4</div>-->
-    <!--</div>-->
 </div>
-
-
 </body>
+
+<script>
+    // Snow Falling
+
+    var pellets = ['<div data-pelletNum="0" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="1" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="2" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="3" class="snowflakes pellets bottom"></div>', '<div data-pelletNum="4" class="snowflakes pellets bottom"></div>',
+        '<div data-pelletNum="0" class="snowflakes pellets middle"></div>', '<div data-pelletNum="1" class="snowflakes pellets middle"></div>', '<div data-pelletNum="2" class="snowflakes pellets middle"></div>', '<div data-pelletNum="3" class="snowflakes pellets middle"></div>',
+        '<div data-pelletNum="0" class="snowflakes pellets top"></div>', '<div data-pelletNum="1" class="snowflakes pellets top"></div>', '<div data-pelletNum="2" class="snowflakes pellets top"></div>'];
+
+    function fallingSnow() {
+        var topPelets = $('.top-pelet');
+        var middlePelets = $('.middle-pelet');
+        var bottomPelets = $('.bottom-pelet');
+        var $snowflakes = $(),
+                createSnowflakes = function () {
+                    var qt = 12;
+                    for (var i = 0; i < qt; ++i) {
+                        var $snowflake = $(pellets[i]);
+                        $snowflake.css({
+                            'left': (Math.random() * $('#site').width()) + 'px',
+                            'top': (-Math.random() * $('#site').height()) + 'px'
+                        });
+                        // add this snowflake to the set of snowflakes
+                        $snowflakes = $snowflakes.add($snowflake);
+                    }
+                    $('#snowZone').prepend($snowflakes);
+                },
+
+                runSnowStorm = function () {
+                    var peletsShown = 0;
+                    var peletCount = pellets.length;
+
+                    $snowflakes.each(function () {
+
+                        var singleAnimation = function ($flake) {
+                            var row;
+                            var flakeOffset = $flake.offset();
+                            var flakeOffsetLeft = flakeOffset.left;
+                            var rowWidth;
+                            var rowOffset;
+                            var rowOffsetLeft;
+                            var leftPosition;
+                            var peletsToShow;
+                            var time;
+
+                            if ($flake.hasClass('bottom')) {
+                                row = $('.bottom-row-container');
+                                peletsToShow = bottomPelets;
+                                time = Math.random() * -2500 + 3000;
+                            }
+                            else if ($flake.hasClass('middle')) {
+                                row = $('.middle-row-container');
+                                peletsToShow = middlePelets;
+                                time = Math.random() * -2500 + 4000;
+                            }
+                            else if ($flake.hasClass('top')) {
+                                row = $('.top-row-container');
+                                peletsToShow = topPelets;
+                                time = Math.random() * -2500 + 5000;
+                            }
+                            rowWidth = row.width();
+                            rowOffset = row.offset();
+                            rowOffsetLeft = rowOffset.left;
+
+                            if (flakeOffsetLeft > (rowOffsetLeft + rowWidth)) {
+                                leftPosition = '-=200'
+                            }
+                            else if (flakeOffsetLeft < rowOffsetLeft) {
+                                leftPosition = '+=100';
+                            }
+                            else {
+                                leftPosition = '+=0';
+                            }
+
+                            $flake.animate({
+                                top: rowOffset.top,
+                                left: leftPosition,
+                                opacity: "0",
+                            }, time, function () {
+
+                                var pelletNum = parseFloat($flake.attr('data-pelletNum'));
+                                var chosenPelet = peletsToShow[pelletNum];
+                                $(chosenPelet).animate({
+                                    opacity: 1,
+                                }, 500);
+                                peletsShown++;
+
+                                $flake.remove();
+                                if(peletsShown == peletCount) {
+
+                                    $('#pyramid').css({
+                                        'border-bottom-color': "#000",
+                                    });
+                                }
+
+                            });
+                        };
+                        singleAnimation($(this));
+                    });
+                };
+
+        createSnowflakes();
+        runSnowStorm();
+    }
+    fallingSnow();
+
+</script>
 </html>
