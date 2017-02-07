@@ -7,3 +7,28 @@
     /*display: none;*/
     /*visibility: hidden;*/
 }
+
+.pyramid-container {
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-left: 300px solid transparent;
+    border-right: 300px solid transparent;
+    border-bottom: 300px solid blue !important;
+    z-index: 1;
+
+}
+
+.intro-text a {
+    /*margin-top: 50px;*/
+}
+
+.pyramid-content {
+    background-color: white;
+    z-index: 1000;
+    position: relative;
+    border: 1px solid white;
+    -webkit-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 8px 5px 0px rgba(0,0,0,0.75);
+}
